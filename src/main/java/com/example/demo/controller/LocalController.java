@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class LocalController {
@@ -16,6 +17,16 @@ public class LocalController {
     @GetMapping("/locals")
     public List<Local> findAllLocals() {
         return localService.findAllLocals();
+    }
+
+    @GetMapping("/findbyname/{name}")
+    public Optional<Local> findLocalByName(@PathVariable String name) {
+        return localService.findByName(name);
+    }
+
+    @GetMapping("/findbynamecase/{name}")
+    public Optional<Local> findLocalByNameIgnore(@PathVariable String name) {
+        return localService.findBynameIgnoreCase(name);
     }
 
     @PostMapping("/local")

@@ -7,6 +7,7 @@ import com.example.demo.repository.LocalRepository;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class LocalServiceImpl implements LocalService {
@@ -42,4 +43,15 @@ public class LocalServiceImpl implements LocalService {
     public void deleteLocal(Long id) {
         localRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<Local> findByName(String name) {
+        return localRepository.findByName(name);
+    }
+
+    @Override
+    public Optional<Local> findBynameIgnoreCase(String name) {
+        return localRepository.findBynameIgnoreCase(name);
+    }
+
 }
