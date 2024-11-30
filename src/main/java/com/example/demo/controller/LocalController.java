@@ -3,7 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.entity.Local;
 import com.example.demo.error.LocalNotFoundException;
 import com.example.demo.service.LocalService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,7 +38,7 @@ public class LocalController {
     }
 
     @PostMapping("/local")
-    public Local savelocal(@RequestBody Local local) {
+    public Local savelocal(@Valid @RequestBody Local local) {
         return localService.saveLocal(local);
     }
 
