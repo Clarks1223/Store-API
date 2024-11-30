@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Local;
+import com.example.demo.error.LocalNotFoundException;
 import com.example.demo.service.LocalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,11 @@ public class LocalController {
     @GetMapping("/locals")
     public List<Local> findAllLocals() {
         return localService.findAllLocals();
+    }
+
+    @GetMapping("/local/{id}")
+    public Local findById(@PathVariable Long id) throws LocalNotFoundException {
+        return localService.findById(id);
     }
 
     @GetMapping("/findbyname/{name}")

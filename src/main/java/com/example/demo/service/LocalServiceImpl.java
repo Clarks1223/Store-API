@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Local;
+import com.example.demo.error.LocalNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.repository.LocalRepository;
@@ -52,6 +53,15 @@ public class LocalServiceImpl implements LocalService {
     @Override
     public Optional<Local> findBynameIgnoreCase(String name) {
         return localRepository.findBynameIgnoreCase(name);
+    }
+
+    @Override
+    public Local findById(Long id) throws LocalNotFoundException {
+        Optional<Local> localBD = localRepository.findById(id);
+        if (!localBD.isPresent()) {
+            throw new LocalNotFoundException("Local is not available");
+        }
+        return localRepository.findById(id).get();
     }
 
 }
